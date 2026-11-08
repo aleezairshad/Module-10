@@ -10,6 +10,7 @@
 #include "Animal.h"
 //#include "binary_tree_node.h" // from the book
 #include "binary_tree node.h" // from Prof Q
+#include "bTree.h"
 using namespace std;
 
 //function prototypes
@@ -344,8 +345,10 @@ void DeleteTree(binary_tree_node<string>*& node)
 }
 
 //option 2
+/*
 void TreeContainerOfIntegers()
 {
+    system("cls");
 	binary_tree_node<int>* root = NULL;
 	int choice;
 	do
@@ -364,7 +367,7 @@ void TreeContainerOfIntegers()
 		case 1:
 		{
 			int value = inputInteger("\n\tEnter an integer to insert: ");
-			//insert(root, value);
+			insert(root, value);
 		}
 		break;
 		case 2:
@@ -388,7 +391,117 @@ void TreeContainerOfIntegers()
 		}
 	} while (true);
 }
+*/
 
+//option 2
+void TreeContainerOfIntegers()
+{
+    system("cls");
+    bTree<int> option2Tree;
+	char option;
+	do
+	{
+		system("cls");
+		cout << "\n\tTree Container of Integers";
+		cout << "\n\t" << string(90, char(205));
+		cout << "\n\t\tA> Insert a node/leaf";
+		cout << "\n\t\tB> Count of Nodes/leaves";
+		cout << "\n\t\tC> Search a node/leaf";
+		cout << "\n\t\tD> Pre-order traversal";
+		cout << "\n\t\tE> In-order traversal";
+		cout << "\n\t\tF> Post-order traversal";
+		cout << "\n\t\tG> Delete the entire tree";
+		cout << "\n\t" << string(90, char(196));
+		cout << "\n\t\t0> return";
+		cout << "\n\t" << string(90, char(205));
+		option = inputChar("\n\tOption: ", static_cast<string>("ABCDEFG0"));
+		switch (toupper(option))
+		{
+		case 'A':
+		{
+			int value = inputInteger("\n\tEnter an integer to insert: ");
+			option2Tree.insert(value);
+		}
+		break;
+		case 'B':
+		{
+			cout << "\n\t\tCount of Nodes/leaves = ";
+			cout << option2Tree.count();
+		}
+		break;
+		case 'C':
+		{
+			int value = inputInteger("\n\tEnter an integer to search: ");
+			bool found = option2Tree.search(value);
+
+			if (found)
+			{
+				cout << "\n\t" << value << " is found.";
+			}
+			else
+			{
+				cout << "\n\t" << value << " cannot be found.";
+			}
+		}
+		break;
+		case 'D':
+		{
+			if (option2Tree.count() == 0)
+			{
+				cout << "\n\t\tERROR: bTree is empty!";
+			}
+			else
+			{
+				int count = option2Tree.count();
+				cout << "\n\t\tPre-order traversal of bTree with " << count << " node(s): \n";
+				option2Tree.preOrderTraversal();
+			}
+		}
+		break;
+		case 'E':
+		{
+			if (option2Tree.count() == 0)
+			{
+				cout << "\n\t\tERROR: bTree is empty!";
+			}
+			else
+			{
+				int count = option2Tree.count();
+				cout << "\n\t\tIn-order traversal of bTree with " << count << " node(s): \n";
+				option2Tree.inOrderTraversal();
+			}
+		}
+		break;
+		case 'F':
+		{
+			if (option2Tree.count() == 0)
+			{
+				cout << "\n\t\tERROR: bTree is empty!";
+			}
+			else
+			{
+				int count = option2Tree.count();
+				cout << "\n\t\tPost-order traversal of bTree with " << count << " node(s): \n";
+				option2Tree.postOrderTraversal();
+			}
+		}
+		break;
+		case 'G':
+		{
+			option2Tree.deleteTree();
+		}
+		break;
+		case '0'://auto call destructor already
+			return;
+		default:
+			cout << "\n\tInvalid choice. Please try again.\n";
+			break;
+		}
+		cout << "\n";
+		system("pause");
+	} while (true);
+
+}
 //option 3
 void animalGuessingGame()
 {
